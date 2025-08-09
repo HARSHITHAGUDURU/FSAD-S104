@@ -1,8 +1,8 @@
 {
   "name": "myapp",
   "version": "0.1.0",
+  "homepage": "https://HARSHITHAGUDURU.github.io/FSAD-S104",
   "private": true,
-  "homepage": "/FSAD-S104/",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
