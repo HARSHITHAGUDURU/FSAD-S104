@@ -1,116 +1,168 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import React, { useState } from "react";
 
-function Navbar() {
-  return (
-    <nav style={styles.nav}>
-      <h1 style={styles.logo}>My Website</h1>
-      <ul style={styles.navLinks}>
-        <li><Link style={styles.link} to="/">Home</Link></li>
-        <li><Link style={styles.link} to="/login">Login</Link></li>
-        <li><Link style={styles.link} to="/about">About</Link></li>
-      </ul>
-    </nav>
-  );
-}
+function App() {
+  const [page, setPage] = useState("home");
 
-
- function Home() {
   return (
     <div style={styles.container}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Welcome to the Home Page</h2>
-      <p style={{ textAlign: "center", fontSize: "18px" }}>
-        This is a simple React site with navigation, multiple pages, and a modern look.
-      </p>
+      {/* Navbar */}
+      <nav style={styles.navbar}>
+        <h2 style={styles.logo}>Percentage Calculator</h2>
+        <div>
+          <button style={styles.navButton} onClick={() => setPage("home")}>
+            Home
+          </button>
+          <button style={styles.navButton} onClick={() => setPage("calculator")}>
+            Calculator
+          </button>
+        </div>
+      </nav>
 
-      <div style={styles.cardContainer}>
-        <div style={styles.card}>
-          <h3>🌐 Explore</h3>
-          <p>Discover amazing content and features on our platform.</p>
-        </div>
-        <div style={styles.card}>
-          <h3>🔐 Secure Login</h3>
-          <p>Your security is our priority. Sign in safely to access your account.</p>
-        </div>
-        <div style={styles.card}>
-          <h3>💡 Learn</h3>
-          <p>We share tips and resources to help you grow your knowledge.</p>
+      {/* Pages */}
+      <div style={styles.pageWrapper}>
+        <div style={styles.page}>
+          {page === "home" ? <HomePage /> : <CalculatorPage />}
         </div>
       </div>
     </div>
   );
 }
 
-
-
-function About() {
+// Home Page Component
+function HomePage() {
   return (
-    <div style={styles.container}>
-      <h2>About Us</h2>
-      <p>We build small and beautiful websites using HTML, CSS, and JavaScript.</p>
+    <div style={styles.card}>
+      <h1>Welcome to the Percentage Calculator</h1>
+      <p>
+        This tool helps you quickly find out your percentage by entering your
+        marks obtained and the total marks.
+      </p>
+      <p>
+        Whether you’re a student tracking your grades, a teacher calculating
+        results, or just someone curious about percentage math — this calculator
+        is simple, fast, and accurate.
+      </p>
+      <ul style={{ textAlign: "left", marginTop: "15px" }}>
+        <li>✅ Instant calculation</li>
+        <li>✅ Easy to use</li>
+        <li>✅ Works on any device</li>
+      </ul>
+      <p style={{ marginTop: "15px" }}>
+        Click on the <b>Calculator</b> page in the menu to get started!
+      </p>
     </div>
   );
 }
 
-function Login() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Login form submitted!");
+// Calculator Page Component
+function CalculatorPage() {
+  const [marks, setMarks] = useState("");
+  const [total, setTotal] = useState("");
+  const [result, setResult] = useState(null);
+
+  const calculatePercentage = () => {
+    if (marks === "" || total === "" || total === "0") {
+      setResult("⚠ Please enter valid numbers");
+      return;
+    }
+    let percentage = (parseFloat(marks) / parseFloat(total)) * 100;
+    setResult(percentage.toFixed(2) + "%");
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input style={styles.input} type="text" placeholder="Username" required />
-        <input style={styles.input} type="password" placeholder="Password" required />
-        <button style={styles.button} type="submit">Sign In</button>
-      </form>
+    <div style={styles.card}>
+      <h2>Percentage Calculator</h2>
+      <input
+        style={styles.input}
+        type="number"
+        placeholder="Marks Obtained"
+        value={marks}
+        onChange={(e) => setMarks(e.target.value)}
+      />
+      <input
+        style={styles.input}
+        type="number"
+        placeholder="Total Marks"
+        value={total}
+        onChange={(e) => setTotal(e.target.value)}
+      />
+      <button style={styles.calcButton} onClick={calculatePercentage}>
+        Calculate
+      </button>
+      {result && <h3 style={{ marginTop: "15px" }}>Result: {result}</h3>}
     </div>
   );
 }
 
+// Inline Styles
 const styles = {
-  nav: {
-    background: "linear-gradient(90deg, #4e54c8, #8f94fb)",
-    padding: "15px 40px",
+  container: {
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#f5f6fa",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
+  navbar: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#2f3640",
+    padding: "10px 20px",
+    color: "#fff",
   },
-  logo: { color: "white", fontSize: "20px" },
-  navLinks: { display: "flex", listStyle: "none" },
-  link: { color: "white", textDecoration: "none", marginLeft: "20px", fontWeight: "bold" },
-  container: {
-    maxWidth: "800px",
-    margin: "40px auto",
-    padding: "20px",
-    background: "white",
-    borderRadius: "10px",
-    boxShadow: "0px 4px 12px rgba(0,0,0,0.1)"
+  logo: {
+    margin: 0,
   },
-  form: { display: "flex", flexDirection: "column" },
-  input: { margin: "10px 0", padding: "10px", border: "1px solid #ccc", borderRadius: "5px" },
-  button: {
-    background: "#4e54c8",
-    color: "white",
+  navButton: {
+    backgroundColor: "#40739e",
     border: "none",
-    padding: "12px",
+    padding: "8px 15px",
+    margin: "0 5px",
+    color: "#fff",
     borderRadius: "5px",
     cursor: "pointer",
-    fontSize: "16px"
-  }
+  },
+  pageWrapper: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  page: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  card: {
+    backgroundColor: "#fff",
+    padding: "30px",
+    borderRadius: "10px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    maxWidth: "450px",
+    textAlign: "center",
+  },
+  input: {
+    width: "90%",
+    padding: "10px",
+    margin: "10px auto",
+    display: "block",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    textAlign: "center",
+  },
+  calcButton: {
+    backgroundColor: "#44bd32",
+    border: "none",
+    padding: "10px 15px",
+    color: "#fff",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "16px",
+    marginTop: "10px",
+  },
 };
 
-export default function App() {
-  return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
-  );
-}
+export default App;
