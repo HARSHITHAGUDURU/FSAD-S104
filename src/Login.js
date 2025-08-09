@@ -1,43 +1,52 @@
+
 // src/Login.js
 import React, { useState } from 'react';
 import './App.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Example: Basic login check (replace with real auth)
-    if (email === 'test@example.com' && password === '123456') {
-      alert('Login successful!');
-    } else {
-      alert('Invalid email or password');
-    }
+    alert(`Logged in as ${username}`);
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-page">
+      <div className="login-card">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <label className="input-label">Username</label>
+          <input
+            className="login-input"
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <label className="input-label">Password</label>
+          <div className="password-wrapper">
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <a href="#" className="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button className="login-button" type="submit">Login</button>
+
+          <p className="signup-text">
+            Don’t have an account? <a href="#" className="signup-link">Sign up</a>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

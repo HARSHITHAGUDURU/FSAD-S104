@@ -1,49 +1,105 @@
 /* src/App.css */
 
-body {
+body, html {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-}
-
-.App {
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0000ff; /* vibrant blue */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-.login-container {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+.App {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-container h2 {
-  margin-bottom: 20px;
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login-card {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 30px;
+  width: 350px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.login-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Rest of your CSS remains unchanged */
+
+.login-card h2 {
+  margin-bottom: 30px;
+  font-weight: 600;
 }
 
-.login-form button {
+.input-label {
+  text-align: left;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #aaa;
+}
+
+.login-input {
   width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+  padding: 12px;
+  margin-bottom: 20px;
   border: none;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  font-size: 14px;
 }
 
-.login-form button:hover {
-  background-color: #0056b3;
+.password-wrapper {
+  position: relative;
+  text-align: left;
+}
+
+.forgot-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #0000ff;
+  text-decoration: none;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: linear-gradient(to right, #4a00e0, #1e90ff);
+}
+
+.signup-text {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-link {
+  color: #0000ff;
+  font-weight: 500;
+  text-decoration: none;
 }
